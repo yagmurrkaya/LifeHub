@@ -42,7 +42,7 @@
                                FontSize="18" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
                     </Frame>
                     
-                    <Button Text="Git" 
+                    <Button Text="Habit Tracker App'e Git!" 
                             x:DataType="{x:Null}"
                             Command="{Binding BindingContext.NavigateToHabitCommand, Source={x:Reference DashPage}}"
                             BackgroundColor="{StaticResource OrangeSecondary}"
@@ -65,7 +65,7 @@
                                FontSize="18" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
                     </Frame>
                     
-                    <Button Text="Git" 
+                    <Button Text="Planner App'e Git!" 
                             x:DataType="{x:Null}"
                             Command="{Binding BindingContext.NavigateToPlannerCommand, Source={x:Reference DashPage}}"
                             BackgroundColor="{StaticResource OrangeSecondary}"
@@ -95,7 +95,7 @@
                         </VerticalStackLayout>
                     </Frame>
                     
-                    <Button Text="Git" 
+                    <Button Text="Mood Journal App'e Git!" 
                             x:DataType="{x:Null}"
                             Command="{Binding NavigateToMoodCommand}"
                             BackgroundColor="{StaticResource OrangeSecondary}"
