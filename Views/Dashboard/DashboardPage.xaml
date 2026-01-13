@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:LifeHub.ViewModels.Dashboard"
+             x:Class="LifeHub.Views.Dashboard.DashboardPage"
+             x:DataType="vm:DashboardViewModel"
+             x:Name="DashPage"
+             Title="Dashboard"
+             BackgroundColor="{AppThemeBinding Light={StaticResource PageBgLight}, Dark={StaticResource PageBgDark}}">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="30" Padding="20">
+            
+            <VerticalStackLayout Spacing="15">
+                <Border Style="{StaticResource WelcomeBorderStyle}">
+                    <Label Text="Welcome to LifeHub 🌤️" 
+                           Style="{StaticResource MainTitleStyle}" />
+                </Border>
+                
+                <Label Text="LifeHub helps you start your day with focus, balance, and positivity. Organize your thoughts, track your mood, and build habits that last. Enter your name to get started!"
+                       TextColor="{AppThemeBinding Light={StaticResource TextSecondaryLight}, Dark={StaticResource TextSecondaryDark}}"
+                       FontSize="13"
+                       HorizontalTextAlignment="Center"
+                       Padding="10,0"/>
+            </VerticalStackLayout>
+
+            <Grid ColumnDefinitions="*, *, *" ColumnSpacing="15">
+    
+                <VerticalStackLayout Grid.Column="0" Spacing="12">
+                    <VerticalStackLayout Spacing="2">
+                        <Label Text="🍎 Habit Tracker" 
+                               TextColor="{AppThemeBinding Light={StaticResource BrownAccent}, Dark={StaticResource OrangeSecondary}}"
+                               FontAttributes="Bold" FontSize="16" HorizontalOptions="Center"/>
+                        <Label Text="Track your daily habits efficiently." 
+                               TextColor="{AppThemeBinding Light={StaticResource TextSecondaryLight}, Dark={StaticResource TextSecondaryDark}}"
+                               FontSize="11" HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                    
+                    <Frame Style="{StaticResource ModuleCardStyle}" HeightRequest="100">
+                        <Label Text="{Binding CompletedHabitsCount}" 
+                               TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}"
+                               FontSize="18" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                    </Frame>
+                    
+                    <Button Text="Git" 
+                            x:DataType="{x:Null}"
+                            Command="{Binding BindingContext.NavigateToHabitCommand, Source={x:Reference DashPage}}"
+                            BackgroundColor="{StaticResource OrangeSecondary}"
+                            TextColor="White" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="1" Spacing="12">
+                    <VerticalStackLayout Spacing="2">
+                        <Label Text="✍️ Planner" 
+                               TextColor="{AppThemeBinding Light={StaticResource BrownAccent}, Dark={StaticResource OrangeSecondary}}"
+                               FontAttributes="Bold" FontSize="16" HorizontalOptions="Center"/>
+                        <Label Text="Organize your tasks and schedule." 
+                               TextColor="{AppThemeBinding Light={StaticResource TextSecondaryLight}, Dark={StaticResource TextSecondaryDark}}"
+                               FontSize="11" HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                    
+                    <Frame Style="{StaticResource ModuleCardStyle}" HeightRequest="100">
+                        <Label Text="{Binding LastTask}" 
+                               TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}"
+                               FontSize="18" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                    </Frame>
+                    
+                    <Button Text="Git" 
+                            x:DataType="{x:Null}"
+                            Command="{Binding BindingContext.NavigateToPlannerCommand, Source={x:Reference DashPage}}"
+                            BackgroundColor="{StaticResource OrangeSecondary}"
+                            TextColor="White" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="2" Spacing="12">
+                    <VerticalStackLayout Spacing="2">
+                        <Label Text="😜 Mood Journal" 
+                               TextColor="{AppThemeBinding Light={StaticResource BrownAccent}, Dark={StaticResource OrangeSecondary}}"
+                               FontAttributes="Bold" FontSize="16" HorizontalOptions="Center"/>
+                        <Label Text="Reflect on how you feel throughout the day." 
+                               TextColor="{AppThemeBinding Light={StaticResource TextSecondaryLight}, Dark={StaticResource TextSecondaryDark}}"
+                               FontSize="11" HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                    
+                    <Frame Style="{StaticResource ModuleCardStyle}" 
+                           HeightRequest="100" 
+                           BackgroundColor="{Binding LatestMoodEntry.MoodColor, FallbackValue='White'}">
+                        <VerticalStackLayout VerticalOptions="Center" Spacing="2">
+                            <Label Text="{Binding LatestMoodEntry.Mood, FallbackValue='Kayıt yok'}" 
+                                   TextColor="{StaticResource TextPrimaryLight}"
+                                   FontSize="18" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                            <Label Text="{Binding LatestMoodEntry.Note}" 
+                                   TextColor="{StaticResource TextSecondaryLight}"
+                                   FontSize="16" HorizontalTextAlignment="Center" LineBreakMode="TailTruncation" MaxLines="2"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                    
+                    <Button Text="Git" 
+                            x:DataType="{x:Null}"
+                            Command="{Binding NavigateToMoodCommand}"
+                            BackgroundColor="{StaticResource OrangeSecondary}"
+                            TextColor="White" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <Button Text="Tüm İstatistikleri Gör" 
+                    Command="{Binding NavigateToStatsCommand}"
+                    Style="{x:Null}" 
+                    BackgroundColor="{StaticResource BrownAccent}" 
+                    TextColor="White" 
+                    HeightRequest="60"
+                    CornerRadius="12"
+                    FontAttributes="Bold"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

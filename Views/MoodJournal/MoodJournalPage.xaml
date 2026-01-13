@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:LifeHub.ViewModels.MoodJournal"
+             xmlns:models="clr-namespace:LifeHub.Models.MoodJournal"
+             x:Class="LifeHub.Views.MoodJournal.MoodJournalPage"
+             x:DataType="vm:MoodJournalViewModel"
+             x:Name="ThisPage"
+             Title="Günlük"
+             BackgroundColor="{AppThemeBinding Light={StaticResource PageBgLight}, Dark={StaticResource PageBgDark}}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Tüm Geçmiş" Clicked="GoToHistory_Clicked" />
+    </ContentPage.ToolbarItems>          
+
+    <ScrollView>
+        <VerticalStackLayout Padding="25" Spacing="20">
+            
+            <Border Stroke="{StaticResource OrangePrimary}" 
+                    BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceBgLight}, Dark={StaticResource SurfaceBgDark}}" 
+                    Padding="20" 
+                    StrokeShape="RoundRectangle 12">
+                <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                    <Label Text="Mood Journal 📖" 
+                           FontSize="28" 
+                           FontAttributes="Bold" 
+                           TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}"/> 
+                    <Label Text="Duygularını kaydet ve takip et!" 
+                           HorizontalTextAlignment="Center" 
+                           TextColor="{AppThemeBinding Light={StaticResource TextSecondaryLight}, Dark={StaticResource TextSecondaryDark}}"/> 
+                </VerticalStackLayout>
+            </Border>
+
+            <Label Text="Bugün nasıl hissediyorsun?" 
+                   FontSize="18" 
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" 
+                   TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}"/>
+            
+            <Label Text="{Binding MoodStatusText}" 
+                   FontSize="17" 
+                   HorizontalOptions="Center" 
+                   TextColor="{AppThemeBinding Light={StaticResource TextSecondaryLight}, Dark={StaticResource TextSecondaryDark}}" />
+
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="15">
+                
+                <Border StrokeShape="RoundRectangle 12" BackgroundColor="{AppThemeBinding Light={StaticResource PeachBorder}, Dark={StaticResource Gray600}}" StrokeThickness="0" HeightRequest="60" WidthRequest="60">
+                    <Button Text="😊" Command="{Binding SelectMoodCommand}" CommandParameter="Happy" FontSize="32" BackgroundColor="Transparent" Padding="0"/>
+                </Border>
+
+                <Border StrokeShape="RoundRectangle 12" BackgroundColor="{AppThemeBinding Light={StaticResource PeachBorder}, Dark={StaticResource Gray600}}" StrokeThickness="0" HeightRequest="60" WidthRequest="60">
+                    <Button Text="😐" Command="{Binding SelectMoodCommand}" CommandParameter="Neutral" FontSize="32" BackgroundColor="Transparent" Padding="0"/>
+                </Border>
+
+                <Border StrokeShape="RoundRectangle 12" BackgroundColor="{AppThemeBinding Light={StaticResource PeachBorder}, Dark={StaticResource Gray600}}" StrokeThickness="0" HeightRequest="60" WidthRequest="60">
+                    <Button Text="😔" Command="{Binding SelectMoodCommand}" CommandParameter="Sad" FontSize="32" BackgroundColor="Transparent" Padding="0"/>
+                </Border>
+
+                <Border StrokeShape="RoundRectangle 12" BackgroundColor="{AppThemeBinding Light={StaticResource PeachBorder}, Dark={StaticResource Gray600}}" StrokeThickness="0" HeightRequest="60" WidthRequest="60">
+                    <Button Text="😡" Command="{Binding SelectMoodCommand}" CommandParameter="Angry" FontSize="32" BackgroundColor="Transparent" Padding="0"/>
+                </Border>
+
+                <Border StrokeShape="RoundRectangle 12" BackgroundColor="{AppThemeBinding Light={StaticResource PeachBorder}, Dark={StaticResource Gray600}}" StrokeThickness="0" HeightRequest="60" WidthRequest="60">
+                    <Button Text="😴" Command="{Binding SelectMoodCommand}" CommandParameter="Tired" FontSize="32" BackgroundColor="Transparent" Padding="0"/>
+                </Border>
+
+            </HorizontalStackLayout>
+
+            <Frame Padding="10" CornerRadius="12" HasShadow="False" 
+                   BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceBgLight}, Dark={StaticResource SurfaceBgDark}}" 
+                   BorderColor="{AppThemeBinding Light={StaticResource PeachBorder}, Dark={StaticResource Gray600}}">
+                <Editor Placeholder="Düşüncelerini buraya yazabilirsin..." 
+                        PlaceholderColor="{StaticResource Gray400}"
+                        Text="{Binding NoteText}"
+                        HeightRequest="120" 
+                        BackgroundColor="Transparent"
+                        TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}"/>
+            </Frame>
+
+            <Button Text="Kaydet" 
+                    Command="{Binding SaveEntryCommand}" 
+                    BackgroundColor="{StaticResource OrangePrimary}" 
+                    TextColor="White" 
+                    CornerRadius="8"
+                    FontAttributes="Bold"/>
+            
+            <Button Text="Hepsini Temizle" 
+                    Command="{Binding ClearAllCommand}" 
+                    BackgroundColor="{StaticResource BrownAccent}" 
+                    TextColor="White" 
+                    CornerRadius="8"/>
+
+            <Label Text="{Binding StatusMessage}" 
+                   HorizontalOptions="Center" 
+                   TextColor="{StaticResource OrangePrimary}" 
+                   FontAttributes="Italic" />
+
+            <Label Text="Son 5 Kayıt" 
+                   FontAttributes="Bold" 
+                   FontSize="16" 
+                   TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}" 
+                   Margin="0,10,0,0" />
+
+            <CollectionView ItemsSource="{Binding RecentEntries}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:MoodEntry">
+                        <Frame Margin="0,5" Padding="12" 
+                               BackgroundColor="{Binding MoodColor}" 
+                               HasShadow="False" CornerRadius="10" 
+                               BorderColor="{AppThemeBinding Light={StaticResource PeachBorder}, Dark={StaticResource Gray600}}">
+                            <Grid ColumnDefinitions="*, Auto">
+                                <Label Text="{Binding DisplayText}" 
+                                       Grid.Column="0" 
+                                       FontSize="14" 
+                                       TextColor="#7A2E14"
+                                       LineBreakMode="WordWrap" />
+                                
+                                <Button Text="🗑️" 
+                                        Grid.Column="1" 
+                                        Command="{Binding BindingContext.DeleteEntryCommand, Source={x:Reference ThisPage}}"
+                                        CommandParameter="{Binding .}"
+                                        x:DataType="{x:Null}"
+                                        BackgroundColor="Transparent"
+                                        FontSize="18"
+                                        VerticalOptions="Center"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

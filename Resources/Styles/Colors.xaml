@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Color x:Key="OrangePrimary">#EA580C</Color>
+    <Color x:Key="OrangeSecondary">#FB923C</Color>
+    <Color x:Key="BrownAccent">#7C2D12</Color>
+    <Color x:Key="PeachBorder">#FED7AA</Color>
+    <Color x:Key="SuccessGreen">#4F7942</Color>
+    <Color x:Key="PageBgLight">#FFF7ED</Color>
+    <Color x:Key="PageBgDark">#1C1917</Color>
+    <Color x:Key="SurfaceBgLight">#FFFFFF</Color>
+    <Color x:Key="SurfaceBgDark">#292524</Color>
+    <Color x:Key="TextPrimaryLight">#431407</Color>
+    <Color x:Key="TextPrimaryDark">#FDE6D8</Color>
+    <Color x:Key="TextSecondaryLight">#9A3412</Color>
+    <Color x:Key="TextSecondaryDark">#FB923C</Color>
+
+    <Color x:Key="Primary">#EA580C</Color> <Color x:Key="PrimaryDark">#7C2D12</Color>
+    <Color x:Key="PrimaryDarkText">#FFFFFF</Color>
+    <Color x:Key="Secondary">#FB923C</Color>
+    <Color x:Key="SecondaryDarkText">#FDE6D8</Color>
+    <Color x:Key="Tertiary">#4F7942</Color>
+    <Color x:Key="White">#FFFFFF</Color>
+    <Color x:Key="Black">#000000</Color>
+    <Color x:Key="OffBlack">#1C1917</Color>
+    <Color x:Key="Gray100">#E1E1E1</Color>
+    <Color x:Key="Gray200">#C8C8C8</Color>
+    <Color x:Key="Gray300">#ACACAC</Color>
+    <Color x:Key="Gray400">#919191</Color>
+    <Color x:Key="Gray500">#6E6E6E</Color>
+    <Color x:Key="Gray600">#404040</Color>
+    <Color x:Key="Gray900">#212121</Color>
+    <Color x:Key="Gray950">#121212</Color>
+    <Color x:Key="MidnightBlue">#191970</Color>
+    <Color x:Key="Magenta">#FF00FF</Color>
+    
+    <Color x:Key="EllipseTrack">#FFF9F2</Color>
+
+</ResourceDictionary>

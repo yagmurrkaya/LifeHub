@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="LifeHub.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dash="clr-namespace:LifeHub.Views.Dashboard"
+    xmlns:habit="clr-namespace:LifeHub.Views.HabitTracker"
+    xmlns:mood="clr-namespace:LifeHub.Views.MoodJournal"
+    xmlns:plan="clr-namespace:LifeHub.Views.Planner"
+    Shell.FlyoutBehavior="Flyout"
+    FlyoutHeaderBehavior="Fixed"
+    Shell.TabBarBackgroundColor="#F0F9FF"
+    Shell.TabBarTitleColor="#EA580C"
+    Shell.TabBarUnselectedColor="#64748B">
+
+    <Shell.FlyoutHeader>
+        <Grid BackgroundColor="#EA580C" HeightRequest="180" Padding="20">
+            <VerticalStackLayout VerticalOptions="Center" Spacing="5">
+                <Border StrokeShape="RoundRectangle 40" HeightRequest="80" WidthRequest="80" 
+                        HorizontalOptions="Start" BackgroundColor="#FDE6D8">
+                    <Label Text="LH" FontSize="32" FontAttributes="Bold" 
+                           TextColor="#7C2D12" HorizontalOptions="Center" VerticalOptions="Center"/>
+                </Border>
+                <Label Text="LIFEHUB" FontSize="22" FontAttributes="Bold" TextColor="White" Margin="0,10,0,0"/>
+                <Label Text="Kişisel Yaşam Asistanın" FontSize="13" TextColor="#FDE6D8"/>
+            </VerticalStackLayout>
+        </Grid>
+    </Shell.FlyoutHeader>
+
+    <FlyoutItem Title="Dashboard" Icon="dashboard_icon.png">
+        <ShellContent 
+            Title="Genel Bakış"
+            ContentTemplate="{DataTemplate dash:DashboardPage}" 
+            Route="DashboardPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Habit Tracker" Icon="habit_icon.png">
+        <Tab Title="Liste" Icon="list_icon.png">
+            <ShellContent 
+                ContentTemplate="{DataTemplate habit:HabitListPage}" 
+                Route="HabitListPage" />
+        </Tab>
+        <Tab Title="Düzenle" Icon="edit_icon.png">
+            <ShellContent 
+                ContentTemplate="{DataTemplate habit:HabitEditPage}" 
+                Route="HabitEditPage" />
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Mood Journal" Icon="mood_icon.png">
+        <Tab Title="Günlük" Icon="edit_icon.png">
+            <ShellContent 
+                Title="Yeni Kayıt"
+                ContentTemplate="{DataTemplate mood:MoodJournalPage}" 
+                Route="MoodJournalPage" />
+        </Tab>
+        
+    </FlyoutItem>
+
+    <FlyoutItem Title="Planner" Icon="planner_icon.png">
+        <Tab Title="Görevler">
+            <ShellContent 
+                ContentTemplate="{DataTemplate plan:PlannerListPage}" 
+                Route="PlannerListPage" />
+        </Tab>
+
+    </FlyoutItem>
+
+    <Shell.ItemTemplate>
+        <DataTemplate x:DataType="ShellItem"> 
+            <Grid ColumnDefinitions="0.2*,0.8*" Padding="15">
+                <Image Source="{Binding Icon}" HeightRequest="22" VerticalOptions="Center" />
+                <Label Grid.Column="1" Text="{Binding Title}" VerticalOptions="Center" 
+                       Margin="10,0" FontSize="16" FontAttributes="Bold"/>
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+
+</Shell>

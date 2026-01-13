@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:LifeHub.ViewModels.HabitTracker"
+             xmlns:models="clr-namespace:LifeHub.Models"
+             x:Class="LifeHub.Views.HabitTracker.HabitListPage"
+             x:DataType="vm:HabitListViewModel"
+             x:Name="HabitPage"
+             Title="Habit Tracker"
+             BackgroundColor="{AppThemeBinding Light={StaticResource PageBgLight}, Dark={StaticResource PageBgDark}}">
+
+    <ContentPage.Resources>
+        <Style x:Key="RoundButtonStyle" TargetType="Button">
+            <Setter Property="WidthRequest" Value="40"/>
+            <Setter Property="HeightRequest" Value="40"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource OrangePrimary}"/>
+            <Setter Property="Padding" Value="0"/>
+        </Style>
+
+        <Style x:Key="HabitCardStyle" TargetType="Border">
+            <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource PeachBorder}, Dark={StaticResource Gray600}}"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource SurfaceBgLight}, Dark={StaticResource SurfaceBgDark}}"/>
+            <Setter Property="Padding" Value="16"/>
+            <Setter Property="Margin" Value="0,8"/>
+            <Setter Property="StrokeShape">
+                <Setter.Value>
+                    <RoundRectangle CornerRadius="16"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="➕ Yeni Ekle" Command="{Binding GoToAddPageCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20">
+            
+            <Border Stroke="{StaticResource OrangePrimary}" 
+                    StrokeThickness="1" 
+                    BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceBgLight}, Dark={StaticResource SurfaceBgDark}}" 
+                    Padding="20" HeightRequest="100" StrokeShape="RoundRectangle 12">
+                <Label Text="Habit Tracker 📝" FontSize="28" FontAttributes="Bold" 
+                       HorizontalOptions="Center" VerticalOptions="Center" 
+                       TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}"/>
+            </Border>
+
+            <Label Text="Alışkanlıklarını takip et, hedeflerine ulaş ve motive kal! 💫"
+                   TextColor="{AppThemeBinding Light={StaticResource TextSecondaryLight}, Dark={StaticResource TextSecondaryDark}}" 
+                   HorizontalTextAlignment="Center" FontSize="15" />
+
+            <Label Text="{Binding TodayDate}" 
+                   HorizontalOptions="Center" 
+                   FontSize="18" 
+                   FontAttributes="Bold" 
+                   TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}" />
+
+            <CollectionView ItemsSource="{Binding Habits}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Habit">
+                        <Border Style="{StaticResource HabitCardStyle}">
+                            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto">
+                                
+                                <VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="2">
+                                    <Label Text="{Binding Name}" FontSize="18" FontAttributes="Bold" 
+                                           TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}" />
+                                    <Label Text="{Binding StatusDisplay}" FontSize="14" 
+                                           TextColor="{AppThemeBinding Light={StaticResource TextSecondaryLight}, Dark={StaticResource TextSecondaryDark}}" />
+                                </VerticalStackLayout>
+
+                                <Button Grid.Row="0" Grid.Column="1" Text="✏️" 
+                                        x:DataType="{x:Null}"
+                                        Command="{Binding BindingContext.GoToEditPageCommand, Source={x:Reference HabitPage}}"
+                                        CommandParameter="{Binding .}"
+                                        BackgroundColor="Transparent" 
+                                        TextColor="{StaticResource OrangePrimary}" 
+                                        FontSize="18" />
+
+                                <HorizontalStackLayout Grid.Row="1" Grid.Column="0" Spacing="10" Margin="0,10,0,0">
+                                    <Button Text="-" Style="{StaticResource RoundButtonStyle}" 
+                                            x:DataType="{x:Null}"
+                                            BackgroundColor="{StaticResource OrangeSecondary}" 
+                                            Command="{Binding BindingContext.DecrementCommand, Source={x:Reference HabitPage}}"
+                                            CommandParameter="{Binding .}" />
+                                    
+                                    <Button Text="+" Style="{StaticResource RoundButtonStyle}" 
+                                            x:DataType="{x:Null}"
+                                            Command="{Binding BindingContext.IncrementCommand, Source={x:Reference HabitPage}}"
+                                            CommandParameter="{Binding .}" />
+                                </HorizontalStackLayout>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Border Stroke="{StaticResource BrownAccent}" 
+                    BackgroundColor="{StaticResource BrownAccent}" 
+                    Padding="15" StrokeShape="RoundRectangle 16">
+                <Label Text="{Binding ProgressSummary}" FontSize="16" FontAttributes="Bold" 
+                       TextColor="White" HorizontalTextAlignment="Center" />
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:LifeHub.ViewModels.Planner"
+             xmlns:models="clr-namespace:LifeHub.Models.Planner"
+             x:Class="LifeHub.Views.Planner.PlannerListPage"
+             x:DataType="vm:PlannerViewModel"
+             x:Name="PlannerPage"
+             Title="Planlayıcı"
+             BackgroundColor="{AppThemeBinding Light={StaticResource PageBgLight}, Dark={StaticResource PageBgDark}}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Ayarlar" Clicked="OnSettingsClicked" Priority="0" />
+    </ContentPage.ToolbarItems>         
+
+    <ScrollView>
+        <VerticalStackLayout Padding="25" Spacing="20">
+            
+            <Border Stroke="{StaticResource OrangePrimary}" 
+                    BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceBgLight}, Dark={StaticResource SurfaceBgDark}}" 
+                    Padding="20" 
+                    StrokeShape="RoundRectangle 12">
+                <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                    <Label Text="Planner! ✍️" 
+                           FontSize="28" 
+                           FontAttributes="Bold" 
+                           TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}"/> 
+                    <Label Text="{Binding TodayDate}" 
+                           HorizontalTextAlignment="Center" 
+                           TextColor="{AppThemeBinding Light={StaticResource TextSecondaryLight}, Dark={StaticResource TextSecondaryDark}}"/> 
+                </VerticalStackLayout>
+            </Border>
+
+            <Frame Padding="10" CornerRadius="12" HasShadow="False" 
+                   BorderColor="{AppThemeBinding Light={StaticResource PeachBorder}, Dark={StaticResource Gray600}}" 
+                   BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceBgLight}, Dark={StaticResource SurfaceBgDark}}">
+                <Grid ColumnDefinitions="*, Auto">
+                    <Entry Placeholder="Yeni görev ekle..." 
+                           PlaceholderColor="{StaticResource Gray400}"
+                           Text="{Binding NewTaskText}" 
+                           TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}"
+                           Grid.Column="0" VerticalOptions="Center"/>
+                    <Button Text="+" 
+                            Command="{Binding AddTaskCommand}" 
+                            BackgroundColor="{StaticResource OrangePrimary}" 
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            FontSize="20"
+                            Grid.Column="1" WidthRequest="45" HeightRequest="45" CornerRadius="22"/>
+                </Grid>
+            </Frame>
+
+            <CollectionView ItemsSource="{Binding Tasks}">
+                <CollectionView.EmptyView>
+                    <Label Text="Bugün için görev yok. ✨" 
+                           HorizontalOptions="Center" 
+                           Margin="0,20" 
+                           TextColor="{AppThemeBinding Light={StaticResource TextSecondaryLight}, Dark={StaticResource TextSecondaryDark}}"/>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:TaskItem">
+                        <Frame Margin="0,5" Padding="10" 
+                               BackgroundColor="{AppThemeBinding Light={Binding BackgroundColor}, Dark={StaticResource SurfaceBgDark}}"
+                               HasShadow="False" 
+                               BorderColor="{AppThemeBinding Light={StaticResource PeachBorder}, Dark={StaticResource Gray600}}">
+                            <Grid ColumnDefinitions="Auto, *, Auto">
+                                
+                                <RadioButton IsChecked="{Binding IsDone}" 
+                                             CheckedChanged="OnRadioButtonChanged"
+                                             Grid.Column="0"
+                                             VerticalOptions="Center"
+                                             Margin="0,0,10,0" />
+                                
+                                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Margin="10,0">
+                                    <Label Text="{Binding Description}" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#7A2E14, Dark={StaticResource TextPrimaryDark}}"/>
+                                    <Label Text="{Binding Timestamp}" FontSize="12" TextColor="{AppThemeBinding Light=#A65D45, Dark={StaticResource TextSecondaryDark}}"/>
+                                </VerticalStackLayout>
+
+                                <Button Grid.Column="2"
+                                        Text="✕"
+                                        x:DataType="{x:Null}" 
+                                        Command="{Binding BindingContext.DeleteTaskCommand, Source={x:Reference PlannerPage}}"
+                                        CommandParameter="{Binding .}"
+                                        BackgroundColor="{AppThemeBinding Light=#F5E9E2, Dark={StaticResource Gray900}}"
+                                        TextColor="{AppThemeBinding Light=#7A2E14, Dark={StaticResource TextPrimaryDark}}"
+                                        WidthRequest="35"
+                                        HeightRequest="35"
+                                        CornerRadius="17" 
+                                        FontAttributes="Bold"
+                                        VerticalOptions="Center" />
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Text="Tümünü Temizle" 
+                    Command="{Binding ClearAllCommand}" 
+                    BackgroundColor="{StaticResource BrownAccent}" 
+                    TextColor="White" 
+                    CornerRadius="8"
+                    FontAttributes="Bold"
+                    Margin="0,10"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

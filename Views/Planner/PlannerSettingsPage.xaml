@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:LifeHub.ViewModels.Planner"
+             x:Class="LifeHub.Views.Planner.PlannerSettingsPage"
+             x:DataType="vm:PlannerSettingsViewModel"
+             Title="Planlayıcı Ayarları"
+             BackgroundColor="{AppThemeBinding Light={StaticResource PageBgLight}, Dark={StaticResource PageBgDark}}">
+
+    <VerticalStackLayout Padding="25" Spacing="20">
+        <Label Text="Tercihler ⚙️" 
+               FontSize="24" 
+               FontAttributes="Bold" 
+               TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}" 
+               Margin="0,0,0,10"/>
+
+        <Border StrokeShape="RoundRectangle 12" 
+                Stroke="{AppThemeBinding Light={StaticResource PeachBorder}, Dark={StaticResource Gray600}}" 
+                Padding="15" 
+                BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceBgLight}, Dark={StaticResource SurfaceBgDark}}">
+            <Grid ColumnDefinitions="*, 80">
+                <VerticalStackLayout Grid.Column="0" VerticalOptions="Center" Spacing="2">
+                    <Label Text="Otomatik Temizle" 
+                           FontAttributes="Bold" 
+                           TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}"/>
+                    <Label Text="Tamamlanan görevleri hemen siler" 
+                           FontSize="12" 
+                           TextColor="{AppThemeBinding Light={StaticResource TextSecondaryLight}, Dark={StaticResource TextSecondaryDark}}"/>
+                </VerticalStackLayout>
+                
+                <Switch Grid.Column="1" 
+                        IsToggled="{Binding AutoDeleteCompleted, Mode=TwoWay}" 
+                        OnColor="{StaticResource OrangePrimary}"
+                        ThumbColor="{AppThemeBinding Light=White, Dark={StaticResource Gray100}}"
+                        HorizontalOptions="End"
+                        VerticalOptions="Center" />
+            </Grid>
+        </Border>
+
+        <Border StrokeShape="RoundRectangle 12" 
+                Stroke="{AppThemeBinding Light={StaticResource PeachBorder}, Dark={StaticResource Gray600}}" 
+                Padding="15" 
+                BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceBgLight}, Dark={StaticResource SurfaceBgDark}}">
+            <VerticalStackLayout Spacing="8">
+                <Label Text="Görev Sıralama Kriteri" 
+                       FontAttributes="Bold" 
+                       TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}"/>
+                <Picker ItemsSource="{Binding SortOptions}" 
+                        SelectedItem="{Binding SortOrder}" 
+                        Title="Sıralama Seçin"
+                        TitleColor="{StaticResource Gray400}"
+                        TextColor="{AppThemeBinding Light={StaticResource OrangePrimary}, Dark={StaticResource OrangeSecondary}}"
+                        HorizontalOptions="Fill" />
+            </VerticalStackLayout>
+        </Border>
+
+    </VerticalStackLayout>
+</ContentPage>

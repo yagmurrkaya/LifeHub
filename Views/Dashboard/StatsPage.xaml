@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:LifeHub.ViewModels.Dashboard"
+             xmlns:models="clr-namespace:LifeHub.Models"
+             x:Class="LifeHub.Views.Dashboard.StatsPage"
+             x:DataType="vm:StatsViewModel"
+             Title="Genel İstatistikler" 
+             BackgroundColor="{AppThemeBinding Light={StaticResource PageBgLight}, Dark={StaticResource PageBgDark}}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            
+            <Frame Style="{StaticResource ModuleCardStyle}">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Habit Tracker App" 
+                           Style="{StaticResource SectionHeaderStyle}" 
+                           HorizontalOptions="Center"/>
+                    
+                    <Grid ColumnDefinitions="120, *" ColumnSpacing="20">
+                        <VerticalStackLayout Grid.Column="0" Spacing="5" VerticalOptions="Center">
+                            <Grid HeightRequest="100" WidthRequest="100">
+                                <Ellipse Stroke="{AppThemeBinding Light={StaticResource EllipseTrack}, Dark={StaticResource Gray600}}" 
+                                         StrokeThickness="8" HeightRequest="100" WidthRequest="100"/>
+                                <Ellipse Stroke="{StaticResource OrangeSecondary}" 
+                                         StrokeThickness="8" StrokeDashArray="1,0" HeightRequest="100" WidthRequest="100"/>
+                                <Label Text="{Binding HabitCompletionRate, StringFormat='{0:P0}'}" 
+                                       TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}"
+                                       FontSize="22" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </Grid>
+                            <Label Text="Tamamlama Oranı" FontSize="10" HorizontalOptions="Center" 
+                                   TextColor="{AppThemeBinding Light={StaticResource TextSecondaryLight}, Dark={StaticResource TextSecondaryDark}}"/>
+                        </VerticalStackLayout>
+
+                        <Grid Grid.Column="1" ColumnDefinitions="*, *" ColumnSpacing="10">
+                            <VerticalStackLayout Grid.Column="0" Spacing="5">
+                                <Label Text="Bitenler" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource SuccessGreen}" HorizontalOptions="Center"/>
+                                <BoxView HeightRequest="2" Color="{StaticResource SuccessGreen}" Margin="0,0,0,5"/>
+                                
+                                <CollectionView ItemsSource="{Binding CompletedHabits}" HeightRequest="120">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="models:Habit">
+                                            <Label Text="{Binding Name, StringFormat='✓ {0}'}" 
+                                                   TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}"
+                                                   FontSize="13" Margin="0,3"/>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="5">
+                                <Label Text="Kalan" FontSize="16" FontAttributes="Bold" 
+                                       TextColor="{AppThemeBinding Light={StaticResource BrownAccent}, Dark={StaticResource OrangeSecondary}}" HorizontalOptions="Center"/>
+                                <BoxView HeightRequest="2" Color="{StaticResource OrangeSecondary}" Margin="0,0,0,5"/>
+                                
+                                <CollectionView ItemsSource="{Binding NotCompletedHabits}" HeightRequest="120">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="models:Habit">
+                                            <Label Text="{Binding Name, StringFormat='• {0}'}" 
+                                                   TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}"
+                                                   FontSize="13" Margin="1"/>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame Style="{StaticResource ModuleCardStyle}">
+                <VerticalStackLayout Spacing="15" HorizontalOptions="Center">
+                    <Label Text="Planner App" Style="{StaticResource SectionHeaderStyle}"/>
+                    <Grid HeightRequest="120" WidthRequest="120">
+                        <Ellipse Stroke="{AppThemeBinding Light={StaticResource EllipseTrack}, Dark={StaticResource Gray600}}" 
+                                 StrokeThickness="10" HeightRequest="120" WidthRequest="120"/>
+                        <Ellipse Stroke="{StaticResource OrangeSecondary}" 
+                                 StrokeThickness="10" HeightRequest="120" WidthRequest="120"/>
+                        <Label Text="{Binding PlannerCompletionRate, StringFormat='{0:P0}'}" 
+                               TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}"
+                               FontSize="26" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    </Grid>
+                    <Label Text="Görev Tamamlama Oranı" FontSize="12" 
+                           TextColor="{AppThemeBinding Light={StaticResource TextSecondaryLight}, Dark={StaticResource TextSecondaryDark}}"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame Style="{StaticResource ModuleCardStyle}">
+                <VerticalStackLayout Spacing="20"> 
+                    <Label Text="Mood Journal App" Style="{StaticResource SectionHeaderStyle}" HorizontalOptions="Center"/>
+                    
+                    <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never" HorizontalOptions="Center">
+                        <HorizontalStackLayout Spacing="10" HorizontalOptions="Center" Padding="0,0,0,10">
+                            
+                            <Border StrokeShape="RoundRectangle 15" Padding="15" WidthRequest="105"
+                                    BackgroundColor="#FFF9C4" 
+                                    Stroke="{StaticResource OrangeSecondary}" StrokeThickness="0.5">
+                                <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                                    <Label Text="Happy 😊" FontAttributes="Bold" TextColor="#7A2E14"/>
+                                    <Label Text="{Binding HappyPercent, StringFormat='{0:P0}'}" 
+                                           FontSize="20" FontAttributes="Bold" TextColor="#7A2E14" HorizontalOptions="Center"/>
+                                </VerticalStackLayout>
+                            </Border>
+
+                            <Border StrokeShape="RoundRectangle 15" Padding="15" WidthRequest="105"
+                                    BackgroundColor="#F5F5F5" 
+                                    Stroke="{StaticResource OrangeSecondary}" StrokeThickness="0.5">
+                                <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                                    <Label Text="Neutral 😐" FontAttributes="Bold" TextColor="#7A2E14"/>
+                                    <Label Text="{Binding NeutralPercent, StringFormat='{0:P0}'}" 
+                                           FontSize="20" FontAttributes="Bold" TextColor="#7A2E14" HorizontalOptions="Center"/>
+                                </VerticalStackLayout>
+                            </Border>
+
+                            <Border StrokeShape="RoundRectangle 15" Padding="15" WidthRequest="105"
+                                    BackgroundColor="#BBDEFB" 
+                                    Stroke="{StaticResource OrangeSecondary}" StrokeThickness="0.5">
+                                <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                                    <Label Text="Sad 😔" FontAttributes="Bold" TextColor="#7A2E14"/>
+                                    <Label Text="{Binding SadPercent, StringFormat='{0:P0}'}" 
+                                           FontSize="20" FontAttributes="Bold" TextColor="#7A2E14" HorizontalOptions="Center"/>
+                                </VerticalStackLayout>
+                            </Border>
+
+                            <Border StrokeShape="RoundRectangle 15" Padding="15" WidthRequest="105"
+                                    BackgroundColor="#FFCDD2" 
+                                    Stroke="{StaticResource OrangeSecondary}" StrokeThickness="0.5">
+                                <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                                    <Label Text="Angry 😡" FontAttributes="Bold" TextColor="#7A2E14"/>
+                                    <Label Text="{Binding AngryPercent, StringFormat='{0:P0}'}" 
+                                           FontSize="20" FontAttributes="Bold" TextColor="#7A2E14" HorizontalOptions="Center"/>
+                                </VerticalStackLayout>
+                            </Border>
+
+                            <Border StrokeShape="RoundRectangle 15" Padding="15" WidthRequest="105"
+                                    BackgroundColor="#E1BEE7" 
+                                    Stroke="{StaticResource OrangeSecondary}" StrokeThickness="0.5">
+                                <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                                    <Label Text="Tired 😴" FontAttributes="Bold" TextColor="#7A2E14"/>
+                                    <Label Text="{Binding TiredPercent, StringFormat='{0:P0}'}" 
+                                           FontSize="20" FontAttributes="Bold" TextColor="#7A2E14" HorizontalOptions="Center"/>
+                                </VerticalStackLayout>
+                            </Border>
+                            
+                        </HorizontalStackLayout>
+                    </ScrollView>
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
