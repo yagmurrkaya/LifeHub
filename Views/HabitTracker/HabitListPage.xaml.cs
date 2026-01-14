@@ -9,12 +9,12 @@ public partial class HabitListPage : ContentPage
     public HabitListPage(HabitListViewModel viewModel)
     {
         InitializeComponent();
-        // Bu satır, XAML içindeki {Binding} ifadelerinin ViewModel'i görmesini sağlar.
+        
         _viewModel = viewModel;
         BindingContext = _viewModel; 
     }
 
-    // Sayfa her ekrana geldiğinde (yeni eklemeden dönünce dahil) çalışır
+    
     protected override void OnAppearing()
     {
         base.OnAppearing();

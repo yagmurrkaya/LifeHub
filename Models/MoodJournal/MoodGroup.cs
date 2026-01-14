@@ -3,7 +3,6 @@ using System.Globalization;
 
 namespace LifeHub.Models.MoodJournal;
 
-// Models/MoodJournal/MoodGroup.cs
 public class MoodGroup : List<MoodEntry>
 {
     public string DateHeader { get; set; }

@@ -8,7 +8,7 @@ public partial class StatsPage : ContentPage
     {
         InitializeComponent();
         
-        // KRİTİK: Eğer bu satır yoksa sayfa boş görünür!
+        
         BindingContext = viewModel;
     }
 }

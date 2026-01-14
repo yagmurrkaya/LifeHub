@@ -37,9 +37,9 @@ public class MoodJournalViewModel : BindableObject
         SaveEntryCommand = new Command(async () => await ExecuteSaveEntry());
         DeleteEntryCommand = new Command<MoodEntry>(async (entry) => await ExecuteDeleteEntry(entry));
         
-        // --- GÜNCELLENDİ ---
+
         ClearAllCommand = new Command(async () => await ExecuteClearAll());
-        // -------------------
+
     }
 
     private void UpdateRecentEntries()
@@ -86,7 +86,6 @@ public class MoodJournalViewModel : BindableObject
         StatusMessage = string.Empty;
     }
 
-    // --- GÜNCELLENEN TEMİZLEME METODU ---
     private async Task ExecuteClearAll()
     {
         if (RecentEntries.Count == 0)

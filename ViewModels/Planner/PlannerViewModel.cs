@@ -1,7 +1,7 @@
-using System.Collections.ObjectModel; // KRİTİK: ObservableCollection hatasını bu çözer
+using System.Collections.ObjectModel; 
 using System.Windows.Input;
-using LifeHub.Models.Planner; // KRİTİK: TaskItem hatasını bu çözer
-using LifeHub.Services;       // KRİTİK: IPlannerService hatasını bu çözer
+using LifeHub.Models.Planner; 
+using LifeHub.Services;       
 using System.Linq;
 
 namespace LifeHub.ViewModels.Planner;
@@ -31,8 +31,7 @@ public class PlannerViewModel : BindableObject
         // Komut atamaları
         AddTaskCommand = new Command(ExecuteAddTask);
         
-        // 2. ADIM: Tekil silme komutunu basitleştirilmiş onay mantığıyla bağlıyoruz
-        //DeleteTaskCommand = new Command<TaskItem>(async (t) => await ExecuteDeleteTask(t));
+        
         DeleteTaskCommand = new Command<TaskItem>(async (task) => await ExecuteDeleteTask(task));
 
         
@@ -95,8 +94,7 @@ public class PlannerViewModel : BindableObject
 
         if (answer)
         {
-            // Service katmanına gitmeden önce direkt ViewModel içindeki listeden siliyoruz
-            // ClearAll metodun Tasks.Clear() yaparak çalıştığına göre, bu da çalışacaktır.
+
 
             string taskName = task.Description;
             Tasks.Remove(task); 
@@ -104,7 +102,7 @@ public class PlannerViewModel : BindableObject
         }
     }
 
-        // 1. TEKİL KONTROL: CheckBox/Switch tıklandığında çalışır
+    
     public void CheckAndAutoDelete(TaskItem task)
     {
         if (task == null) return;
@@ -120,7 +118,6 @@ public class PlannerViewModel : BindableObject
         }
     }
 
-    // 2. TOPLU TEMİZLEME: Ayarlardan geri dönüldüğünde çalışacak olan "Sihirli" metod
     public void PurgeCompletedTasks()
     {
         bool isAutoDelete = Preferences.Default.Get("AutoDeleteTasks", false);

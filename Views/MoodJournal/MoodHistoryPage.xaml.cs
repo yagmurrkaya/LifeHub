@@ -8,7 +8,7 @@ public partial class MoodHistoryPage : ContentPage
     {
         InitializeComponent();
         
-        // MauiProgram.cs'den gelen hazır viewModel'i BindingContext'e bağlıyoruz
+        
         BindingContext = viewModel;
     }
 

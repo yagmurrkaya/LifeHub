@@ -1,8 +1,8 @@
-// ViewModels/Dashboard/DashboardViewModel.cs
+
 using LifeHub.Services;
 using System.Windows.Input;
-using LifeHub.Models.MoodJournal; // MoodEntry'yi tanımak için ekledik
-using LifeHub.Views.Dashboard; // StatsPage'e navigasyon için
+using LifeHub.Models.MoodJournal; 
+using LifeHub.Views.Dashboard; 
 
 namespace LifeHub.ViewModels.Dashboard;
 
@@ -15,8 +15,6 @@ public class DashboardViewModel : BindableObject
     // Özet Verileri
     public string CompletedHabitsCount => $"{_habitService.GetAll().Count(h => h.Progress >= h.Goal)} Alışkanlık Tamamlandı";
     public string LastTask => _plannerService.GetTasks().FirstOrDefault()?.Description ?? "Henüz görev yok";
-    //public string LatestMood => _moodService.GetEntries().FirstOrDefault()?.Mood ?? "Henüz kayıt yok";
-    // BURASI DEĞİŞTİ: Artık sadece mood ismini değil, tüm nesneyi döndürüyoruz
     public MoodEntry LatestMoodEntry => _moodService.GetEntries().FirstOrDefault();
 
     // Navigasyon Komutları
@@ -37,7 +35,7 @@ public class DashboardViewModel : BindableObject
         NavigateToMoodCommand = new Command(async () => await Shell.Current.GoToAsync("//MoodJournalPage"));
         NavigateToStatsCommand = new Command(async () => 
         {
-            // nameof(StatsPage) kullanarak hata yapma riskini sıfıra indiriyoruz
+            
             await Shell.Current.GoToAsync(nameof(StatsPage));
         });
     }

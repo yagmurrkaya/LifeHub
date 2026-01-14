@@ -1,4 +1,4 @@
-// Views/Dashboard/DashboardPage.xaml.cs
+
 
 using LifeHub.ViewModels.Dashboard;
 

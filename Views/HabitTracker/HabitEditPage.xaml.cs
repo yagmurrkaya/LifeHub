@@ -8,7 +8,7 @@ public partial class HabitEditPage : ContentPage
     {
         InitializeComponent();
         
-        // Düzenleme sayfası için ViewModel bağlantısı
+       
         BindingContext = viewModel;
     }
 }

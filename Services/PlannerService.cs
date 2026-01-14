@@ -27,7 +27,6 @@ public class PlannerService : IPlannerService
     {
         if (task == null) return;
 
-        // Nesne zaten ObservableCollection içinde olduğu için direkt referansla silebiliriz
         MainThread.BeginInvokeOnMainThread(() =>
         {
             if (_tasks.Contains(task))

@@ -1,13 +1,13 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace LifeHub.Models.Planner; // Adres bu olmalı
+namespace LifeHub.Models.Planner; 
 
 public class TaskItem : INotifyPropertyChanged
 {
     private bool _isDone;
-    public string Description { get; set; } = string.Empty; // Gereksinim 4.4: Title
-    public string Timestamp { get; set; } = string.Empty;    // Gereksinim 4.4: Time
+    public string Description { get; set; } = string.Empty; 
+    public string Timestamp { get; set; } = string.Empty;    
 
     public bool IsDone
     {

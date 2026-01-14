@@ -21,13 +21,11 @@ public class HabitAddViewModel : BindableObject
 
     // KOMUT TANIMLARI
     public ICommand SaveCommand { get; }
-    public ICommand CancelCommand { get; } // 1. BURADA TANIMLI OLMALI
+    public ICommand CancelCommand { get; } 
 
     public HabitAddViewModel(IHabitService habitService)
     {
         _habitService = habitService;
-
-        // 2. BURADA ATAMASI YAPILMALI
         SaveCommand = new Command(async () => await SaveHabit());
         CancelCommand = new Command(async () => await Shell.Current.GoToAsync(".."));
     }

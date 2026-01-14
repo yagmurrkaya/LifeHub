@@ -15,7 +15,7 @@ public class Habit : BindableObject
         set 
         { 
             _progress = value; 
-            // Planner'daki gibi değişikliği bildiriyoruz
+            
             OnPropertyChanged(nameof(Progress)); 
             OnPropertyChanged(nameof(StatusDisplay)); 
         }

@@ -8,10 +8,8 @@ public class MoodEntry
     public string Note { get; set; } = string.Empty;
     public DateTime Date { get; set; }
 
-    // Ekran görüntülerindeki "Tarih | Mood \n Not" formatı
     public string DisplayText => $"{Date.ToString("dd MMM HH:mm", new CultureInfo("tr-TR"))} | {Mood}\n{Note}";
 
-    // Ekran görüntülerindeki renk kodlaması
     public Color MoodColor => Mood switch
     {
         "Happy" => Color.FromArgb("#FFF4B1"),   // Sarı

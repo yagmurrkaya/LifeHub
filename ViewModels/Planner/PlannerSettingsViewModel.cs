@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using LifeHub.Models.Planner; // KRİTİK: TaskItem hatasını bu çözer
-using LifeHub.Services;       // KRİTİK: IPlannerService hatasını bu çözer
+using LifeHub.Models.Planner; 
+using LifeHub.Services;       
 
 namespace LifeHub.ViewModels.Planner;
 

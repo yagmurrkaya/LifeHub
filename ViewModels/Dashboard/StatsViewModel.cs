@@ -1,4 +1,4 @@
-// ViewModels/Stats/StatsViewModel.cs
+
 using System.Collections.ObjectModel;
 using LifeHub.Models;
 using LifeHub.Models.MoodJournal;

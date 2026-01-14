@@ -28,43 +28,12 @@ public class HabitListViewModel : BindableObject
         set { _todayDate = value; OnPropertyChanged(); } 
     }
 
-    // public HabitListViewModel(IHabitService habitService)
-    // {
-    //     _habitService = habitService;
-
-        
-
-    //     Habits = new ObservableCollection<Habit>();
-
-    //     // Komut tanımlamaları
-
-    //     TodayDate = DateTime.Now.ToString("📅 dd MMMM dddd");
-    //     IncrementCommand = new Command<Habit>(h => 
-    //     { 
-    //         if (h.Progress < h.Goal) 
-    //         {
-    //             h.Progress++; 
-    //             UpdateSummary(); 
-    //         }
-    //     });
-    //     DecrementCommand = new Command<Habit>(h => { if (h.Progress > 0) h.Progress--; UpdateSummary(); });
-
-    //     GoToAddPageCommand = new Command(async () => await Shell.Current.GoToAsync(nameof(HabitAddPage)));
-    //     GoToEditPageCommand = new Command<Habit>(async (h) => 
-    //         await Shell.Current.GoToAsync(nameof(HabitEditPage), new Dictionary<string, object> { { "SelectedHabit", h } }));
-
-    //     // ÖNCE listeyi doldur, SONRA özeti güncelle
-    //     LoadHabits();
-    // }
-
     public HabitListViewModel(IHabitService habitService)
     {
         _habitService = habitService;
 
-        // 1. Gereksiz ikinci "Habits = new..." satırını sildik.
         TodayDate = DateTime.Now.ToString("📅 dd MMMM dddd");
 
-        // 2. Komutlara null kontrolü ekledik
         IncrementCommand = new Command<Habit>(h => 
         { 
             if (h != null && h.Progress < h.Goal) 
@@ -102,7 +71,6 @@ public class HabitListViewModel : BindableObject
     {
         var updatedList = _habitService.GetAll();
         
-        // Habits artık null değil, güvenle Clear yapabiliriz
         Habits.Clear();
         foreach (var habit in updatedList)
         {

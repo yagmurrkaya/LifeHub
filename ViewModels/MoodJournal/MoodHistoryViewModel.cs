@@ -1,6 +1,5 @@
 
 
-// ViewModels/MoodJournal/MoodHistoryViewModel.cs
 using System.Collections.ObjectModel;
 using LifeHub.Models.MoodJournal;
 using LifeHub.Services;
@@ -14,8 +13,6 @@ public class MoodHistoryViewModel : BindableObject
 {
     private readonly IMoodService _moodService;
     public ObservableCollection<MoodGroup> GroupedEntries { get; set; } = new();
-
-    //public ICommand BackCommand => new Command(async () => await Shell.Current.GoToAsync(".."));
 
     public MoodHistoryViewModel(IMoodService moodService)
     {
